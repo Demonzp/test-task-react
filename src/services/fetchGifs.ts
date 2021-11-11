@@ -1,9 +1,6 @@
-//import * as dotenv from 'dotenv';
-import { Gif } from '../types/store';
-import { IResGifsParceServer, ResGif, IResGifsIn, IResSearchGifs } from '../types/serverData';
+import { IResGifsParceServer, IResGifsIn, IResSearchGifs } from '../types/serverData';
 import axiosService from './axiosService';
 
-//dotenv.config();
 // const gifs = (): Gif []=>{
 //   const arrGifs: Gif [] = [];
 
@@ -54,39 +51,41 @@ import axiosService from './axiosService';
 //   }
 // };
 
+const parseServerData = (page:number,data:IResGifsIn|IResSearchGifs):IResGifsParceServer=>{
+  return {
+    ...data,
+    pagination: {
+      ...data.pagination,
+      pages: Math.ceil(data.pagination.total_count/data.pagination.count),
+      page
+    },
+    data: data.data.map((objGif) => {
+      return {
+        ...objGif,
+        id: objGif.id+Math.floor(Math.random()*100),
+        images: {
+          downsized: {
+            ...objGif.images.downsized,
+            width: Number(objGif.images.downsized.width),
+            height: Number(objGif.images.downsized.height),
+            size: Number(objGif.images.downsized.size)
+          }
+        }
+      }
+    })
+  }; 
+}
+
 export const fetchGifsReq = async (page: number, limit: number): Promise<IResGifsParceServer> => {
   try {
 
-    const res = await axiosService.axios.get<IResGifsIn>('', {
-      params: {
-        api_key: process.env.REACT_APP_API_KEY,
-        limit: limit,
-        offset: page<=1?0:(page-1)*limit
-      }
+    const res = await axiosService.get<IResGifsIn>('',{
+      limit: limit,
+      offset: page<=1?0:(page-1)*limit
     });
 
-    return {
-      ...res.data,
-      pagination: {
-        ...res.data.pagination,
-        pages: Math.ceil(res.data.pagination.total_count/res.data.pagination.count),
-        page
-      },
-      data: res.data.data.map((objGif: ResGif): Gif => {
-        return {
-          ...objGif,
-          id: objGif.id+Math.floor(Math.random()*100),
-          images: {
-            downsized: {
-              ...objGif.images.downsized,
-              width: Number(objGif.images.downsized.width),
-              height: Number(objGif.images.downsized.height),
-              size: Number(objGif.images.downsized.size)
-            }
-          }
-        }
-      })
-    };
+    return parseServerData(page, res.data);
+
   } catch (error) {
     throw error;
   }
@@ -94,38 +93,13 @@ export const fetchGifsReq = async (page: number, limit: number): Promise<IResGif
 
 export const searchGifsReq = async (search: string, page: number, limit: number): Promise<IResSearchGifs>=>{
   try {
-    const res = await axiosService.axios.get('',{
-      params:{
-        q:search,
-        api_key: process.env.REACT_APP_API_KEY,
-        limit: limit,
-        offset: page<=1?0:(page-1)*limit
-      }
+    const res = await axiosService.get<IResSearchGifs>('',{
+      limit: limit,
+      offset: page<=1?0:(page-1)*limit,
+      q:search
     });
 
-    return {
-      ...res.data,
-      pagination: {
-        ...res.data.pagination,
-        pages: Math.ceil(res.data.pagination.total_count/res.data.pagination.count),
-        page
-      },
-      data: res.data.data.map((objGif: ResGif): Gif => {
-        return {
-          ...objGif,
-          id: objGif.id+Math.floor(Math.random()*100),
-          images: {
-            downsized: {
-              ...objGif.images.downsized,
-              width: Number(objGif.images.downsized.width),
-              height: Number(objGif.images.downsized.height),
-              size: Number(objGif.images.downsized.size)
-            }
-          }
-        }
-      }),
-      search
-    };
+    return {...parseServerData(page, res.data), search};
 
   } catch (error) {
     throw error;

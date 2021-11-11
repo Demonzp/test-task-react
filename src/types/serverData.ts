@@ -1,21 +1,5 @@
 import { Gif } from './store';
 
-type Images = {
-  downsized: {
-    url: string,
-    width: string,
-    height: string,
-    size: string
-  }
-}
-
-export type ResGif = {
-  type: string,
-  id: string,
-  title: string,
-  images: Images
-}
-
 export interface IResSearchGifs extends IResGifsParceServer {
   search: string
 }
@@ -25,7 +9,7 @@ export interface IResGifsParceServer extends IResGifsServerOut {
 }
 
 export interface IResGifsIn extends IResGifsServerIn {
-  data: ResGif[]
+  data: Gif[]
 }
 
 export interface IResGifsLocal extends IResGifsBaseOut {
