@@ -56,10 +56,10 @@ import axiosService from './axiosService';
 
 export const fetchGifsReq = async (page: number, limit: number): Promise<IResGifsParceServer> => {
   try {
-    console.log('API = ', process.env.REACT_APP_API_KEY);
+
     const res = await axiosService.axios.get<IResGifsIn>('', {
       params: {
-        api_key: process.env.API_KEY,
+        api_key: process.env.REACT_APP_API_KEY,
         limit: limit,
         offset: page<=1?0:(page-1)*limit
       }
@@ -97,7 +97,7 @@ export const searchGifsReq = async (search: string, page: number, limit: number)
     const res = await axiosService.axios.get('',{
       params:{
         q:search,
-        api_key: process.env.API_KEY,
+        api_key: process.env.REACT_APP_API_KEY,
         limit: limit,
         offset: page<=1?0:(page-1)*limit
       }
