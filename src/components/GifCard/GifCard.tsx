@@ -31,16 +31,18 @@ const GifCard: React.FC<Props> = ({ gif, onClick, children }) => {
   }
 
   return (
-    <Col xs={8} md={3} className="d-flex align-items-center justify-content-center" style={{ minWidth:100, minHeight:240, position: 'relative' }}>
-      {iconEl}
-      <img
-        style={{ maxWidth: 200, maxHeight: 250, cursor: 'pointer' }}
-        src={gif.images.downsized.url}
-        alt={gif.title}
-        onClick={clickHandle}
-        onMouseOver={mouseOverHandle}
-        onMouseOut={mouseOutHandle}
-      />
+    <Col xs={8} md={3} className="d-flex align-items-center justify-content-center" style={{ minWidth:100, minHeight:250, position: 'relative' }}>
+      <div className="d-flex align-items-center justify-content-center" style={{backgroundColor: '#C0C0C0', minWidth: 200, minHeight: 250, marginBottom: 2}}>
+        {iconEl}
+        <img
+          style={{ maxWidth: 200, maxHeight: 250, cursor: 'pointer' }}
+          src={gif.images.downsized.url}
+          alt={gif.title}
+          onClick={clickHandle}
+          onMouseOver={mouseOverHandle}
+          onMouseOut={mouseOutHandle}
+        />
+      </div>
     </Col>
   );
 }
