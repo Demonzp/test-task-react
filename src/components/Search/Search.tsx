@@ -15,7 +15,7 @@ const Search: React.FC = ()=>{
   };
 
   return (
-    <Form onSubmit={searchHandle}>
+    <Form onSubmit={searchHandle} className="d-flex">
       <Row>
         <Col>
           <InputGroup style={{minWidth:300}}>

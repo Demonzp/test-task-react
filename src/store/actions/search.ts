@@ -24,7 +24,7 @@ export const setSearchGlobal = createAsyncThunk<void, string, {state: RootState,
       const prevSearch = getState().search.search;
       dispatch(clearState());
       dispatch(setSearch(search));
-      if(prevSearch!=search && prevSearch!==''){
+      if(prevSearch!==search && prevSearch!==''){
         dispatch(setForce(true));
       }
     } catch (error) {

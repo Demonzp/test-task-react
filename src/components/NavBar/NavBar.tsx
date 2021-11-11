@@ -5,24 +5,30 @@ import Search from '../Search';
 
 const NavBar: React.FC = () => {
   return (
-    <Navbar>
-      <Container>
-        <Navbar.Collapse>
-          <Nav className="me-auto">
-            <Link 
+
+    <Navbar expand="lg">
+      <Container >
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: '100px' }}
+            navbarScroll
+          >
+            <Link
               to={RouteNames.HOME}
               className="nav-link"
             >
               Home
             </Link>
-            <Link 
+            <Link
               to={RouteNames.FAVORITES}
               className="nav-link"
             >
               Favorites
             </Link>
-            <Search />
           </Nav>
+          <Search />
         </Navbar.Collapse>
       </Container>
     </Navbar>

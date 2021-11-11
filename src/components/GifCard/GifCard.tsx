@@ -31,7 +31,7 @@ const GifCard: React.FC<Props> = ({ gif, onClick, children }) => {
   }
 
   return (
-    <Col xs={8} md={3} className="align-items-center justify-content-center" style={{ position: 'relative' }}>
+    <Col xs={8} md={3} className="d-flex align-items-center justify-content-center" style={{ minWidth:100, minHeight:240, position: 'relative' }}>
       {iconEl}
       <img
         style={{ maxWidth: 200, maxHeight: 250, cursor: 'pointer' }}
