@@ -11,6 +11,7 @@ import { clearState } from '../../store/slices/sliceSearch';
 import { searchGifs, setSearchGlobal } from '../../store/actions/search';
 import { useAppSelector } from '../../store/hooks';
 import { RouteNames } from '../../types/routeNames';
+import GifCardIcon from '../../components/GifCardIcon';
 
 const SearchPage: React.FC = ()=>{
   const {force} = useAppSelector(state=>state.search);
@@ -59,7 +60,11 @@ const SearchPage: React.FC = ()=>{
       >
         {
           pages.map(page => {
-            return <GifsPack key={page.id} pack={page} onClick={clickGifHandle} />;
+            return (
+              <GifsPack key={page.id} pack={page} onClick={clickGifHandle}>
+                <GifCardIcon icon="heart"/>
+              </GifsPack>
+            );
           })
         }
       </InfiniteScroll>

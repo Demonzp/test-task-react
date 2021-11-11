@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import GifCardIcon from '../../components/GifCardIcon';
 import GifsPack from '../../components/GifsPack';
 import useScrollLoad from '../../hooks/useScrollLoad';
 import { delFromFavorites, getFavorites } from '../../store/actions/favorites';
@@ -32,7 +33,11 @@ const Favorites: React.FC = () => {
       >
         {
           pages.map(page => {
-            return <GifsPack key={page.id} pack={page} onClick={clickGifHandle} />;
+            return (
+              <GifsPack key={page.id} pack={page} onClick={clickGifHandle}>
+                <GifCardIcon icon="trash"/>
+              </GifsPack>
+            );
           })
         }
       </InfiniteScroll>

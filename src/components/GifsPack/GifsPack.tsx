@@ -4,15 +4,16 @@ import GifCard from '../GifCard';
 
 type Props = {
   pack: Pack,
-  onClick: (gif: Gif) => any
+  onClick: (gif: Gif) => any,
+  children?: React.ReactElement;
 }
 
-const GifsPack: React.FC<Props> = ({ pack, onClick }) => {
+const GifsPack: React.FC<Props> = ({ pack, onClick, children }) => {
   return (
       <Row>
         {
           pack.gifs.map(gif=>{
-            return <GifCard key={gif.id} gif={gif} onClick={onClick}/>
+            return <GifCard key={gif.id} gif={gif} onClick={onClick}>{children}</GifCard>
           })
         }
       </Row>

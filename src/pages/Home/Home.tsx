@@ -8,6 +8,7 @@ import { fetchGifs } from '../../store/actions/home';
 import { Gif } from '../../types/store';
 import { addToFavorite } from '../../store/actions/favorites';
 import { clearState } from '../../store/slices/sliceHome';
+import GifCardIcon from '../../components/GifCardIcon';
 
 
 const Home: React.FC = () => {
@@ -33,7 +34,11 @@ const Home: React.FC = () => {
       >
         {
           pages.map(page => {
-            return <GifsPack key={page.id} pack={page} onClick={clickGifHandle} />;
+            return (
+              <GifsPack key={page.id} pack={page} onClick={clickGifHandle}>
+                <GifCardIcon icon="heart"/>
+              </GifsPack>
+            );
           })
         }
       </InfiniteScroll>
