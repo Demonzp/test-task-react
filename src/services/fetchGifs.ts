@@ -13,7 +13,6 @@ const parseServerData = (page: number, data: IResGifsIn | IResSearchGifs): IResG
     data: data.data.map((objGif) => {
       return {
         ...objGif,
-        id: objGif.id + Math.floor(Math.random() * 100),
         images: {
           downsized: {
             ...objGif.images.downsized,
