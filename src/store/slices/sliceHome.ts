@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ICustomError } from '../../types/serverData';
 import { StateBase } from '../../types/store';
 import { fetchGifs } from '../actions/home';
 
@@ -41,6 +42,16 @@ const sliceHome = createSlice({
         gifs: payload.data
       });
 
+      state.isLoading = false;
+    })
+
+    builder.addCase(fetchGifs.rejected, (state, { payload }) => {
+      const tPayload = payload as ICustomError;
+      state.pages.push({
+        id: tPayload.offset,
+        gifs: [],
+        error: tPayload.message
+      });
       state.isLoading = false;
     })
   }

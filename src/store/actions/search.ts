@@ -1,19 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { searchGifsReq } from '../../services/fetchGifs';
-import { IResSearchGifs } from '../../types/serverData';
+import { ICustomError, IResSearchGifs } from '../../types/serverData';
 import { clearState, setForce, setSearch } from '../slices/sliceSearch';
 import { AppDispatch, RootState } from '../store';
 
-export const searchGifs = createAsyncThunk<IResSearchGifs, void, {state: RootState}>(
+export const searchGifs = createAsyncThunk<IResSearchGifs, void, {state: RootState, rejectWithValue: ICustomError}>(
   'search/searchGifs',
-  async (_, {getState}) => {
+  async (_, {getState, rejectWithValue}) => {
+    const page = getState().search.page;
+    const limit = getState().search.limit;
     try {
       const data = await searchGifsReq(getState().search.search, getState().search.page, getState().search.limit);
       return data;
     } catch (error) {
-      throw error;
+      return rejectWithValue({message: (error as Error).message, offset:page<=1?0:(page-1)*limit});
     }
-
   }
 );
 

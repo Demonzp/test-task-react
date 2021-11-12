@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StateBaseSearch } from '../../types/store';
 import { searchGifs } from '../actions/search';
-
+import { ICustomError } from '../../types/serverData';
 
 const initialState: StateBaseSearch = {
   page: 1,
@@ -37,27 +37,38 @@ const sliceSearch = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(searchGifs.fulfilled, (state, { payload }) => {
-      state.countPages = payload.pagination.pages;
+    builder
+      .addCase(searchGifs.fulfilled, (state, { payload }) => {
+        state.countPages = payload.pagination.pages;
 
-      const hasNextPage = payload.pagination.page < payload.pagination.pages;
-      if (hasNextPage) {
-        state.page += 1;
-      } else {
-        state.page = payload.pagination.pages;
-      }
-      state.hasNextPage = hasNextPage;
+        const hasNextPage = payload.pagination.page < payload.pagination.pages;
+        if (hasNextPage) {
+          state.page += 1;
+        } else {
+          state.page = payload.pagination.pages;
+        }
+        state.hasNextPage = hasNextPage;
 
-      state.pages.push({
-        id: payload.pagination.offset,
-        gifs: payload.data
-      });
+        state.pages.push({
+          id: payload.pagination.offset,
+          gifs: payload.data
+        });
 
-      state.countItems = payload.pagination.total_count;
+        state.countItems = payload.pagination.total_count;
 
-      state.isLoading = false;
-      state.force = false;
-    })
+        state.isLoading = false;
+        state.force = false;
+      })
+
+      .addCase(searchGifs.rejected, (state, { payload }) => {
+        const tPayload = payload as ICustomError;
+        state.pages.push({
+          id: tPayload.offset,
+          gifs: [],
+          error: tPayload.message
+        });
+        state.isLoading = false;
+      })
   }
 });
 

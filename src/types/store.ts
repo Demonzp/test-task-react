@@ -17,7 +17,8 @@ export type Gif = {
 
 export type Pack = {
   id: number,
-  gifs: Gif[]
+  gifs: Gif[],
+  error?: string
 }
 
 export type StateBase = {

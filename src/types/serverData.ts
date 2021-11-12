@@ -1,5 +1,10 @@
 import { Gif } from './store';
 
+export interface ICustomError {
+  message: string,
+  offset: number
+}
+
 export interface IResSearchGifs extends IResGifsParceServer {
   search: string
 }

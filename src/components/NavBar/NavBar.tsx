@@ -1,12 +1,12 @@
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { RouteNames } from '../../types/routeNames';
 import Search from '../Search';
 
 const NavBar: React.FC = () => {
   return (
 
-    <Navbar expand="lg">
+    <Navbar expand="lg" className="mb-3">
       <Container className="px-5">
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
@@ -15,18 +15,18 @@ const NavBar: React.FC = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Link
+            <NavLink
               to={RouteNames.HOME}
-              className="nav-link"
+              className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
             >
               Home
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to={RouteNames.FAVORITES}
-              className="nav-link"
+              className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
             >
               Favorites
-            </Link>
+            </NavLink>
           </Nav>
           <Search />
         </Navbar.Collapse>
