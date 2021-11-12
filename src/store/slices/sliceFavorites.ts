@@ -9,7 +9,7 @@ const initialState: StateBase = {
   countPages: 0,
   isLoading: false,
   hasNextPage: false,
-  countItems: 0
+  countItems: 0,
 };
 
 

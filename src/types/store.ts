@@ -11,18 +11,19 @@ export type Gif = {
   type: string,
   id: string,
   title: string,
+  username: string,
   images: Images
 }
 
 export type Pack = {
   id: number,
-  gifs: Gif []
+  gifs: Gif[]
 }
 
 export type StateBase = {
   page: number,
   limit: number,
-  pages: Pack [],
+  pages: Pack[],
   countPages: number,
   isLoading: boolean,
   hasNextPage: boolean,
@@ -32,7 +33,7 @@ export type StateBase = {
 export type StateBaseSearch = {
   page: number,
   limit: number,
-  pages: Pack [],
+  pages: Pack[],
   countPages: number,
   isLoading: boolean,
   hasNextPage: boolean,

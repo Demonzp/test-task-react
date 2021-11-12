@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
 class AxiosService {
-  private static baseURL = 'https://api.giphy.com/v1/gifs/trending';
+  private static baseURL = 'https://api.giphy.com/v1/gifs';
   axios: AxiosInstance;
   private static instance: AxiosService;
 
