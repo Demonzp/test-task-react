@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import GifCardIcon from '../../components/GifCardIcon';
 import GifsPack from '../../components/GifsPack';
+import MySpinner from '../../components/Spinner';
 import useScrollLoad from '../../hooks/useScrollLoad';
 import { delFromFavorites, getFavorites } from '../../store/actions/favorites';
 import { useAppDispatch } from '../../store/hooks';
@@ -29,7 +30,7 @@ const Favorites: React.FC = () => {
         dataLength={pages.length}
         next={fetchNextPage}
         hasMore={!!hasNextPage}
-        loader={<div>Loading...</div>}
+        loader={<MySpinner />}
       >
         {
           pages.map(page => {

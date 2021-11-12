@@ -12,6 +12,7 @@ import { searchGifs, setSearchGlobal } from '../../store/actions/search';
 import { useAppSelector } from '../../store/hooks';
 import { RouteNames } from '../../types/routeNames';
 import GifCardIcon from '../../components/GifCardIcon';
+import MySpinner from '../../components/Spinner';
 
 const SearchPage: React.FC = ()=>{
   const {force} = useAppSelector(state=>state.search);
@@ -56,7 +57,7 @@ const SearchPage: React.FC = ()=>{
         dataLength={pages.length}
         next={fetchNextPage}
         hasMore={!!hasNextPage}
-        loader={<div>Loading...</div>}
+        loader={<MySpinner />}
       >
         {
           pages.map(page => {

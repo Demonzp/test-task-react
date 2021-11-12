@@ -9,6 +9,7 @@ import { Gif } from '../../types/store';
 import { addToFavorite } from '../../store/actions/favorites';
 import { clearState } from '../../store/slices/sliceHome';
 import GifCardIcon from '../../components/GifCardIcon';
+import MySpinner from '../../components/Spinner';
 
 
 const Home: React.FC = () => {
@@ -30,7 +31,7 @@ const Home: React.FC = () => {
         dataLength={pages.length}
         next={fetchNextPage}
         hasMore={!!hasNextPage}
-        loader={<div>Loading...</div>}
+        loader={<MySpinner />}
       >
         {
           pages.map(page => {
