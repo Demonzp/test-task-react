@@ -12,7 +12,7 @@ nav {
 
 .full{
   width: 100%;
-  overflow-x: hidden !important;
+  overflow: hidden !important;
 }
 
 body{
