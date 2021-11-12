@@ -1,0 +1,10 @@
+.iconCont{
+  position: absolute;
+  pointer-events: none;
+  background-color: white;
+  width: 40px;
+  height: 32px;
+  border-radius: 2px;
+  left: 78%;
+  top: 3%;
+}

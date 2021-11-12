@@ -7,7 +7,7 @@ const NavBar: React.FC = () => {
   return (
 
     <Navbar expand="lg">
-      <Container style={{paddingLeft: 200, paddingRight: 200}}>
+      <Container className="px-5">
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav

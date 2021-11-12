@@ -24,7 +24,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container className="px-5">
       <InfiniteScroll
         className="full"
         dataLength={pages.length}

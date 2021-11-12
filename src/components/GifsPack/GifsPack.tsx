@@ -10,7 +10,7 @@ type Props = {
 
 const GifsPack: React.FC<Props> = ({ pack, onClick, children }) => {
   return (
-      <Row style={{paddingLeft: 200, paddingRight: 200}}>
+      <Row>
         {
           pack.gifs.map(gif=>{
             return <GifCard key={gif.id} gif={gif} onClick={onClick}>{children}</GifCard>

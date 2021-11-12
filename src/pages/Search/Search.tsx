@@ -47,7 +47,7 @@ const SearchPage: React.FC = ()=>{
   };
 
   return(
-    <Container>
+    <Container className="px-5">
       <Alert variant="success" onClose={closeHandle} dismissible>
         <Alert.Heading>{`found ${countItems} according to your request " ${searchParams.get('q')} "`}</Alert.Heading>
       </Alert>
