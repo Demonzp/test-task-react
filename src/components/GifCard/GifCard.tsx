@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import { Gif } from '../../types/store';
 
@@ -10,13 +10,12 @@ type Props = {
 
 const GifCard: React.FC<Props> = ({ gif, onClick, children }) => {
   const [isIcon, setIsIcon] = useState(false);
-  const [iconEl, setIconEl] = useState<React.ReactElement|undefined>();
 
-  useEffect(()=>{
+  const iconEl = useMemo(()=> {
     if(children){
-      setIconEl(React.cloneElement(children, { isIcon }));
+      return React.cloneElement(children, { isIcon });
     }
-  }, [children, isIcon])
+  }, [children, isIcon]);
 
   const clickHandle = () => {
     onClick(gif);
